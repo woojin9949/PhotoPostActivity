@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "952610507892",
+    "project_id": "photopostactivity",
+    "storage_bucket": "photopostactivity.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:952610507892:android:c0854099bdb5aa26fe9521",
+        "android_client_info": {
+          "package_name": "woojin.projects.photopostactivity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "952610507892-v855183g6va7j06i9ka5qdepvpmk920r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3c825Oa_1N5lpM2nM69MYHhBS_vBYI2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "952610507892-v855183g6va7j06i9ka5qdepvpmk920r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
