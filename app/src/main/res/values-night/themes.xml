@@ -3,5 +3,9 @@
     <style name="Base.Theme.PhotoPostActivity" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="colorSecondary">#673AB7</item>
+        <item name="colorOnSecondary">@color/black</item>
     </style>
 </resources>
