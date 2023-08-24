@@ -1,14 +1,9 @@
 package woojin.projects.photopostactivity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.view.isVisible
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.ktx.app
 import woojin.projects.photopostactivity.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
