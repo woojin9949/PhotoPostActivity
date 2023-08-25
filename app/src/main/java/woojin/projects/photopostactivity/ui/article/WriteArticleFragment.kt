@@ -9,6 +9,8 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.ktx.firestore
@@ -22,18 +24,15 @@ import java.util.UUID
 class WriteArticleFragment : Fragment(R.layout.fragment_write) {
 
     private lateinit var binding: FragmentWriteBinding
-
-    private var selectedUri: Uri? = null
+    private lateinit var viewModel: WriteArticleViewModel
 
     private val pickMedia =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             // Callback is invoked after the user selects a media item or closes the
             // photo picker.
             if (uri != null) {
-                selectedUri = uri
-                binding.photoImageView.setImageURI(uri)
-                binding.plusButton.isVisible = false
-                binding.deleteButton.isVisible = true
+                //ViewModel uri 주입
+                viewModel.updateSelectedUri(uri)
             }
         }
 
@@ -41,12 +40,31 @@ class WriteArticleFragment : Fragment(R.layout.fragment_write) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentWriteBinding.bind(view)
 
-        startPicker()
+        setupViewModel()
+        if (viewModel.selectedUri.value == null) {
+            startPicker()
+        }
         setupPhotoImageView()
         setupDeleteButton()
         setupSubmitButton(view)
         setupBackButton()
 
+    }
+
+    private fun setupViewModel() {
+        viewModel = ViewModelProvider(requireActivity()).get<WriteArticleViewModel>()
+
+        viewModel.selectedUri.observe(viewLifecycleOwner) {
+            //비동기로 호출
+            binding.photoImageView.setImageURI(it)
+            if (it != null) {
+                binding.plusButton.isVisible = false
+                binding.deleteButton.isVisible = true
+            } else {
+                binding.deleteButton.isVisible = false
+                binding.plusButton.isVisible = true
+            }
+        }
     }
 
     private fun startPicker() {
@@ -55,7 +73,7 @@ class WriteArticleFragment : Fragment(R.layout.fragment_write) {
 
     private fun setupPhotoImageView() {
         binding.photoImageView.setOnClickListener {
-            if (selectedUri == null) {
+            if (viewModel.selectedUri == null) {
                 startPicker()
             }
         }
@@ -64,9 +82,8 @@ class WriteArticleFragment : Fragment(R.layout.fragment_write) {
     private fun setupDeleteButton() {
         binding.deleteButton.setOnClickListener {
             binding.photoImageView.setImageURI(null)
-            selectedUri = null
-            binding.deleteButton.isVisible = false
-            binding.plusButton.isVisible = true
+            viewModel.updateSelectedUri(null)
+
         }
     }
 
@@ -91,6 +108,7 @@ class WriteArticleFragment : Fragment(R.layout.fragment_write) {
                     Firebase.storage.reference.child("articles/photo/$fileName")
                         .downloadUrl
                         .addOnSuccessListener {
+                            //storage에 업로드한 이미지의 downloadUrl을 받아옴
                             successHandler(it.toString())
                         }.addOnFailureListener {
                             errorHandler(it)
@@ -104,11 +122,13 @@ class WriteArticleFragment : Fragment(R.layout.fragment_write) {
     private fun setupSubmitButton(view: View) {
         binding.submitButton.setOnClickListener {
             showProgress()
-            if (selectedUri != null) {
-                val photoUri = selectedUri ?: return@setOnClickListener
+            if (viewModel.selectedUri.value != null) {
+                val photoUri = viewModel.selectedUri.value ?: return@setOnClickListener
                 uploadImage(
                     photoUri,
                     successHandler = {
+                        //람다식으로 uploadImage의 successHandler를 통해 uploadArticle 메소드 실행 ->
+                        //이미지의 url과 작성글
                         uploadArticle(it, binding.descriptionEditText.text.toString())
                     },
                     errorHandler = {

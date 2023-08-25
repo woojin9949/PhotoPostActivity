@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_homeFragment_to_articleDetailFragment"
             app:destination="@id/articleDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_bookMarkArticleFragment"
+            app:destination="@id/bookMarkArticleFragment" />
 
     </fragment>
     <fragment
@@ -47,9 +50,19 @@
     <fragment
         android:id="@+id/articleDetailFragment"
         android:name="woojin.projects.photopostactivity.ui.article.ArticleDetailFragment"
-        android:label="글 상세정보{articleId}" >
+        android:label="글 상세정보{articleId}"
+        tools:layout="@layout/fragment_article_detail">
         <argument
             android:name="articleId"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookMarkArticleFragment"
+        android:name="woojin.projects.photopostactivity.ui.bookmark.BookMarkArticleFragment"
+        android:label="북마크"
+        tools:layout="@layout/fragment_bookmark_article">
+        <action
+            android:id="@+id/action_bookMarkArticleFragment_to_articleDetailFragment"
+            app:destination="@id/articleDetailFragment" />
     </fragment>
 </navigation>

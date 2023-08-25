@@ -45,60 +45,78 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
 
-    <ImageView
-        android:id="@+id/photoImageView"
+    <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="15dp"
-        android:background="@color/gray_cc"
-        android:scaleType="centerCrop"
-        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarUnderLineView" />
+        app:layout_constraintTop_toBottomOf="@id/toolbarLayout">
 
-    <ImageView
-        android:id="@+id/plusButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:alpha="0.5"
-        android:src="@drawable/baseline_add_24"
-        app:layout_constraintBottom_toBottomOf="@id/photoImageView"
-        app:layout_constraintEnd_toEndOf="@id/photoImageView"
-        app:layout_constraintStart_toStartOf="@id/photoImageView"
-        app:layout_constraintTop_toTopOf="@id/photoImageView" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/deleteButton"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:src="@drawable/baseline_clear_24"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@id/photoImageView"
-        app:layout_constraintTop_toTopOf="@id/photoImageView"
-        tools:visibility="visible" />
+            <ImageView
+                android:id="@+id/photoImageView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="15dp"
+                android:background="@color/gray_cc"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/descriptionEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="15dp"
-        android:background="@null"
-        android:hint="사진에 대해 설명해주세요"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/photoImageView" />
+            <ImageView
+                android:id="@+id/plusButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:alpha="0.5"
+                android:src="@drawable/baseline_add_24"
+                app:layout_constraintBottom_toBottomOf="@id/photoImageView"
+                app:layout_constraintEnd_toEndOf="@id/photoImageView"
+                app:layout_constraintStart_toStartOf="@id/photoImageView"
+                app:layout_constraintTop_toTopOf="@id/photoImageView" />
+
+            <ImageView
+                android:id="@+id/deleteButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/baseline_clear_24"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/photoImageView"
+                app:layout_constraintTop_toTopOf="@id/photoImageView"
+                tools:visibility="visible" />
+
+            <EditText
+                android:id="@+id/descriptionEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:background="@null"
+                android:hint="사진에 대해 설명해주세요"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/photoImageView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
 
     <FrameLayout
         android:id="@+id/progressBarLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
