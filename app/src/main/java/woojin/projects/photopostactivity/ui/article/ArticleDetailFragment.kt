@@ -20,6 +20,7 @@ class ArticleDetailFragment : Fragment(R.layout.fragment_article_detail) {
     private val args: ArticleDetailFragmentArgs by navArgs()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding = FragmentArticleDetailBinding.bind(view)
         val articleId = args.articleId
 
